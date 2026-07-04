@@ -1,0 +1,1 @@
+"""Documentation Agent - Generates technical documentation and ADRs."""

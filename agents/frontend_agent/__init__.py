@@ -1,0 +1,1 @@
+"""Frontend Agent - Generates React/Next.js frontend code."""

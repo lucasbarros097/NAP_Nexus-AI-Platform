@@ -1,0 +1,1 @@
+"""MCP Tool: Bash shell execution for system operations."""

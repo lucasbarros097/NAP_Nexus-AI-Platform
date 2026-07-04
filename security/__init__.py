@@ -1,0 +1,1 @@
+"""Security module — Code Signing, integrity verification, and secure packaging."""

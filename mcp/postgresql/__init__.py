@@ -1,0 +1,1 @@
+"""MCP Tool: PostgreSQL database operations for schema management."""

@@ -1,0 +1,1 @@
+"""Architect Agent - Orchestrates task decomposition and workflow coordination."""

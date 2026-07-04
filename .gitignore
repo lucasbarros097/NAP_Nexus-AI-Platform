@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.egg
+
+# Node
+node_modules/
+.next/
+dist/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/*.log
+logs/*.tmp
+
+# Docker
+docker-data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Workspace (generated content)
+workspace/*
+
+# Coverage
+htmlcov/
+.coverage
+coverage/

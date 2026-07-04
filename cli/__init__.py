@@ -1,0 +1,1 @@
+"""NAP CLI - Modo Imersivo de linha de comando para interação com a plataforma."""

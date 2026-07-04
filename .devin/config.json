@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Write(**)",
+      "Exec(**)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "read_config_from": {
+    "cursor": false,
+    "windsurf": false,
+    "claude": false
+  },
+  "agent": {
+    "model": "swe-1-6-fast"
+  }
+}

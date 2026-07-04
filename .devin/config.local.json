@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Exec(docker ps)",
+      "Exec(docker compose)",
+      "Exec(ls)",
+      "Exec(cat)",
+      "Exec(curl)",
+      "Exec(sleep)",
+      "Exec(rm)",
+      "Exec(python)",
+      "Exec(./build.sh)",
+      "Exec(NAP_Nexus/bin/pip install)",
+      "Exec(mkdir)",
+      "Exec(cp)",
+      "Exec(nap)",
+      "Exec(dpkg)",
+      "Exec(pip show)",
+      "Exec(sudo dpkg)",
+      "Exec(chmod)",
+      "Exec(./docs/demo_update.sh)"
+    ]
+  }
+}

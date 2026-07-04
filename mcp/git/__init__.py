@@ -1,0 +1,1 @@
+"""MCP Tool: Git operations for version control automation."""

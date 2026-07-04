@@ -1,0 +1,13 @@
+# NAP V2 - Nexus AI Platform V2
+# Dependências para o CLI interativo com TUI Hacker
+
+# Interface TUI (Terminal User Interface)
+rich>=13.7.0
+prompt-toolkit>=3.0.43
+
+# Dependências para integração com OpenRouter (futuro)
+# openai>=1.12.0
+# httpx>=0.27.0
+
+# Logging e utilitários
+python-dotenv>=1.0.0
