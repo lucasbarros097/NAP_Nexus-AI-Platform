@@ -64,18 +64,17 @@ graph LR
 
 ## 🌟 Sobre o Projeto
 
-A **NAP (Nexus AI Platform)** é um ecossistema de engenharia de software autônomo projetado para atuar como uma equipe inteira de desenvolvimento. 
+A **NAP (Nexus AI Platform)** é uma plataforma de engenharia de software autônoma que orquestra agentes de inteligência artificial especializados para automatizar o ciclo completo de desenvolvimento.
 
-### 🎯 O Problema
-Engenheiros gastam 60%+ do tempo em tarefas acessórias: context switching, documentação repetitiva, configuração de ambientes, correção de regressões. Ferramentas como Copilot auxiliam em autocompletar linhas, mas falham em compreender a **visão macro** de arquitetura.
+Com um **Orquestrador Central (Architect)** baseado em grafos de tarefas (DAG), a NAP transforma requisitos em linguagem natural em projetos completos através de:
 
-### ✨ A Solução
-A NAP implementa um **Orquestrador Central (Architect)** baseado em grafos de tarefas (DAG). O desenvolvedor insere um requisito em linguagem natural e o Orquestrador:
-- Analisa a demanda
-- Gera documentos de decisão arquitetural (ADRs)
-- Divide o épico em tarefas atômicas
-- Distribui tarefas para agentes de IA hiper-especializados
-- Executa trabalho de forma paralela e segura
+- 🧠 **Análise Inteligente** - Compreensão de requisitos e geração de arquitetura
+- 📐 **Planejamento Estratégico** - Documentos ADR e decomposição em tarefas
+- 🤖 **Execução Paralela** - Agentes especializados trabalhando simultaneamente
+- 🔍 **Qualidade Automática** - Revisão de código e verificação de segurança
+- 📝 **Documentação Contínua** - Geração automática de documentação técnica
+
+A plataforma isola completamente a interface do usuário da lógica complexa de processamento, permitindo interação via **interface web Next.js** ou **terminal TUI hacker**, com backend em **FastAPI** e suporte a múltiplos modelos LLM via **OpenRouter**.
 
 ---
 
