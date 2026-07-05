@@ -4,381 +4,432 @@
 
 **Plataforma de Engenharia de Software de Alta Performance Potencializada por Inteligência Artificial Multiagente**
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0052CC?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
-[![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs)](https://nextjs.org)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)](https://docker.com)
-[![OpenRouter](https://img.shields.io/badge/OpenRouter-AI-10B981?style=for-the-badge)](https://openrouter.ai)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0052CC?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
+[![OpenRouter](https://img.shields.io/badge/OpenRouter-AI-10B981?style=for-the-badge&logo=openai&logoColor=white)](https://openrouter.ai)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 *Orquestração de agentes autônomos para arquitetura, codificação, documentação e revisão em um fluxo contínuo.*
+
+[🚀 Começar](#-instalação-rápida) •
+[📖 Documentação](#-documentação-da-api) •
+[🏗️ Arquitetura](#-arquitetura) •
+[🤝 Contribuir](#-contribuição)
 
 </div>
 
 ---
 
-## 📋 Índice
-1. [Visão Geral e Filosofia do Projeto](#-visão-geral-e-filosofia-do-projeto)
-2. [Arquitetura de Sistemas Detalhada](#-arquitetura-de-sistemas-detalhada)
-3. [Ecossistema Multiagente (Especializações)](#-ecossistema-multiagente-especializações)
-4. [Stack Tecnológica e Justificativas](#-stack-tecnológica-e-justificativas)
-5. [Guia de Instalação e Configuração Completo](#-guia-de-instalação-e-configuração-completo)
-   - [Pré-requisitos e Verificação](#pré-requisitos-e-verificação)
-   - [Configuração de Variáveis de Ambiente (.env)](#configuração-de-variáveis-de-ambiente-env)
-   - [Deploy com Docker Compose](#deploy-com-docker-compose)
-   - [Configuração para Desenvolvimento Local (Bare-Metal)](#configuração-para-desenvolvimento-local-bare-metal)
-6. [Manual de Uso da CLI / TUI Hacker](#-manual-de-uso-da-cli--tui-hacker)
-7. [Documentação da API e Endpoints Principais](#-documentação-da-api-e-endpoints-principais)
-8. [Segurança, Governança e Human-in-the-Loop](#-segurança-governança-e-human-in-the-loop)
-9. [Guia de Contribuição e Engenharia de Agentes](#-guia-de-contribuição-e-engenharia-de-agentes)
-10. [Roadmap e Visão de Futuro](#-roadmap-e-visão-de-futuro)
-
----
-
-## 🌟 Visão Geral e Filosofia do Projeto
-
-A **NAP (Nexus AI Platform)** não é apenas mais um gerador de código isolado ou um assistente de chat simples. Ela foi concebida como um **ecossistema de engenharia de software autônomo e semi-autônomo**, projetado para atuar como uma equipe inteira de desenvolvimento de software dentro de uma única esteira de produção.
-
-### O Problema Atual
-No desenvolvimento tradicional, engenheiros gastam mais de 60% do seu tempo em tarefas acessórias: alternar contextos, escrever documentações repetitivas, configurar ambientes Docker, corrigir regressões de testes ou revisar sintaxes de código. Ferramentas como Copilot auxiliam em autocompletar linhas, mas falham em compreender a **visão macro** de uma arquitetura de microsserviços ou o impacto de uma alteração no banco de dados sobre o front-end.
-
-### A Solução NAP
-A NAP resolve o problema de contexto macro ao implementar um **Orquestrador Central (Architect)** baseado em grafos de tarefas (DAG). O desenvolvedor insere um requisito de alto nível em linguagem natural (ex: *"Preciso de um sistema de autenticação JWT com controle de acesso RBAC, persistido no Postgres e com tela de login responsiva no Next.js"*). O Orquestrador analisa a demanda, gera documentos de decisão arquitetural (ADRs), divide o épico em tarefas atômicas e distribui essas tarefas para agentes de IA hiper-especializados que executam o trabalho de forma paralela e segura.
-
----
-
-## 🏗️ Arquitetura de Sistemas Detalhada
-
-A topologia da plataforma é distribuída de forma a isolar completamente a interface do usuário da lógica complexa de processamento de contexto de IA. Abaixo está a representação estrutural de comunicação síncrona e assíncrona do sistema:
+## 🎯 Visão Rápida
 
 ```mermaid
-graph TD
-    %% Estilos Globais
-    style User fill:#2d3748,stroke:#4a5568,stroke-width:2px,color:#fff
-    style API fill:#1a365d,stroke:#2b6cb0,stroke-width:2px,color:#fff
-    style Orchestrator fill:#2c5282,stroke:#4299e1,stroke-width:2px,color:#fff
-    style OpenRouter fill:#234e52,stroke:#319795,stroke-width:2px,color:#fff
-
-    User((👤 Operador / Engenheiro))
+graph LR
+    A[👤 Seu Requisito] --> B[🧠 Orquestrador AI]
+    B --> C[📐 Architect Agent]
+    B --> D[💻 Backend Agent]
+    B --> E[🎨 Frontend Agent]
+    B --> F[🔍 Reviewer Agent]
+    B --> G[📝 Docs Agent]
+    C & D & E & F & G --> H[✅ Projeto Completo]
     
-    subgraph Camada de Apresentação (UI/UX)
-        Browser[🖥️ Painel Web - Next.js 14<br>Porta :3000 / SSR / Tailwind]
-        Terminal[⌨️ CLI / TUI Hacker<br>Rich / prompt-toolkit]
-    end
-
-    User -->|Interage via Web| Browser
-    User -->|Interage via Terminal| Terminal
-
-    subgraph Núcleo de Processamento (Core API)
-        API[🚀 Backend FastAPI<br>Porta :8000 / Asyncio / Router]
-        Browser <-->|HTTP REST / WebSockets| API
-        Terminal <-->|Chamadas REST nativas| API
-    end
-
-    subgraph Inteligência e Orquestração (AI Core)
-        Orchestrator[🧠 Orquestrador Central<br>Decomposição em DAG / Graph Theory]
-        MCP[🛠️ Ferramentas MCP / SDK<br>Acesso ao FileSystem, Git e Docker]
-        
-        API -->|Instancia Sessão| Orchestrator
-        Orchestrator <-->|Executa Comandos| MCP
-    end
-
-    subgraph Gateway de Inferência de Modelos
-        OpenRouter{🔌 OpenRouter Gateway}
-        Orchestrator <-->|Chamadas com Streaming| OpenRouter
-    end
-
-    subgraph Matriz de Agentes Especialistas
-        AgentBack[💻 Agente Backend<br>Python / FastAPI / SQLA]
-        AgentFront[🎨 Agente Frontend<br>TypeScript / Next / Tailwind]
-        AgentReview[🔍 Agente Reviewer<br>Segurança / Testes / Sonar]
-        AgentDocs[📝 Agente Docs<br>ADRs / Markdown / MkDocs]
-    end
-
-    OpenRouter -->|Assina contexto| AgentBack
-    OpenRouter -->|Assina contexto| AgentFront
-    OpenRouter -->|Assina contexto| AgentReview
-    OpenRouter -->|Assina contexto| AgentDocs
-
-    subgraph Infraestrutura e Persistência de Dados
-        DB[(🗄️ PostgreSQL 16<br>Dados Estruturados & Estados)]
-        Cache[(⚡ Redis 7<br>Fila de Tarefas & PubSub)]
-        VectorDB[(📐 Qdrant Vector DB<br>Memória de Longo Prazo / RAG)]
-        FS[💾 FileSystem Local / Workspace<br>Código Fonte Gerado]
-    end
-
-    AgentBack & AgentFront -->|Persiste Código| FS
-    AgentReview -->|Audita Arquivos| FS
-    AgentDocs -->|Gera Documentação| FS
-    API <-->|Cache de Sessões| Cache
-    Orchestrator <-->|Busca Semântica Contextual| VectorDB
-    AgentBack & API -->|Leitura/Escrita| DB
+    style A fill:#3b82f6,color:#fff
+    style B fill:#8b5cf6,color:#fff
+    style C fill:#10b981,color:#fff
+    style D fill:#10b981,color:#fff
+    style E fill:#10b981,color:#fff
+    style F fill:#f59e0b,color:#fff
+    style G fill:#f59e0b,color:#fff
+    style H fill:#ef4444,color:#fff
 ```
 
 ---
 
-## 🤖 Ecossistema Multiagente (Especializações)
+## 📋 Índice
 
-Diferente de abordagens lineares, a NAP cria uma mesa de debates de engenharia de software antes de colocar a primeira linha de código no arquivo. Cada agente opera sob um *prompt de sistema* extremamente rigoroso e focado em sua disciplina:
-
-### 1. 📐 Architect Agent (O Orquestrador)
-* **Função:** Atua como o CTO/Principal Architect do projeto. Ele recebe a especificação bruta do usuário e a converte em um plano técnico viável.
-* **Capacidades:** Gera documentos ADR (Architecture Decision Records), define padrões de design (Clean Architecture, DDD ou MVC) e constrói a árvore de dependência das tarefas para evitar conflitos de merge entre os outros agentes.
-
-### 2. 💻 Backend Agent (O Desenvolvedor Core)
-* **Função:** Codificação puramente lógica do lado do servidor.
-* **Capacidades:** Domínio profundo de Python, FastAPI, tratamento assíncrono, estruturação de schemas com Pydantic v2, escrita de queries eficientes no SQLAlchemy e mapeamento de migrações estruturais via Alembic.
-
-### 3. 🎨 Frontend Agent (O UI/UX Coder)
-* **Função:** Transformar especificações de rotas e dados de API em interfaces ricas, performáticas e responsivas.
-* **Capacidades:** Geração de componentes limpos em Next.js (App Router), aplicação rigorosa de padrões TailwindCSS, controle de estados globais ou locais e tratamento correto de renderização no lado do servidor (SSR) e no cliente (CSR).
-
-### 4. 🔍 Reviewer Agent (O Auditor de Qualidade)
-* **Função:** Atuar como a barreira de segurança e garantia de qualidade (QA). Ele é acionado automaticamente a cada alteração efetuada pelos agentes de Backend e Frontend.
-* **Capacidades:** Varredura em busca de vulnerabilidades (OWASP Top 10, SQL Injection, vazamento de memória), checagem de conformidade com PEP 8/ESLint, verificação de cobertura de testes unitários e bloqueio de código defeituoso.
-
-### 5. 📝 Docs Agent (O Engenheiro de Conhecimento)
-* **Função:** Garantir que o projeto seja documentado em tempo real, eliminando o "débito de documentação".
-* **Capacidades:** Geração automática de documentação técnica interna, arquivos Markdown autoexplicativos, diagramas de arquitetura atualizados e docstrings padronizadas no código fonte.
+- [🎯 Visão Rápida](#-visão-rápida)
+- [🌟 Sobre o Projeto](#-sobre-o-projeto)
+- [🏗️ Arquitetura](#-arquitetura)
+- [🤖 Ecossistema Multiagente](#-ecossistema-multiagente)
+- [🛠️ Stack Tecnológica](#-stack-tecnológica)
+- [⚙️ Instalação Rápida](#-instalação-rápida)
+- [💻 CLI / TUI Hacker](#-cli--tui-hacker)
+- [🚀 Documentação da API](#-documentação-da-api)
+- [🛡️ Segurança](#-segurança)
+- [🤝 Contribuição](#-contribuição)
+- [🗺️ Roadmap](#-roadmap)
 
 ---
 
-## 🛠️ Stack Tecnológica e Justificativas
+## 🌟 Sobre o Projeto
 
-A escolha de ferramentas para a NAP priorizou performance, tipagem estática para estabilidade do código gerado por IA e flexibilidade de armazenamento de contexto:
+A **NAP (Nexus AI Platform)** é um ecossistema de engenharia de software autônomo projetado para atuar como uma equipe inteira de desenvolvimento. 
 
-<details>
-<summary><strong>Python 3.10+ & FastAPI</strong></summary>
-Escolhidos pela velocidade de execução bruta devido ao suporte nativo a operações assíncronas (`async/await`) e documentação imediata via Swagger, crucial para os agentes entenderem o que os outros estão expondo.
-</details>
+### 🎯 O Problema
+Engenheiros gastam 60%+ do tempo em tarefas acessórias: context switching, documentação repetitiva, configuração de ambientes, correção de regressões. Ferramentas como Copilot auxiliam em autocompletar linhas, mas falham em compreender a **visão macro** de arquitetura.
 
-<details>
-<summary><strong>Next.js 14 & TypeScript</strong></summary>
-O uso de TypeScript garante que o Agente de Front-end siga interfaces estritas expostas pelo Back-end. O Next.js com App Router provê a otimização de performance necessária para dashboards em tempo real.
-</details>
-
-<details>
-<summary><strong>PostgreSQL 16 & Redis 7</strong></summary>
-PostgreSQL atua como banco transacional robusto para armazenar logs de auditoria e históricos. O Redis atua como barramento de comunicação assíncrona rápida (Pub/Sub) e gerenciador de filas para que os agentes processem tarefas pesadas em background.
-</details>
-
-<details>
-<summary><strong>Qdrant Vector DB & OpenRouter</strong></summary>
-Qdrant é o motor de RAG que permite indexar semanticamente toda a base de código do usuário. O OpenRouter é a abstração que permite trocar dinamicamente o modelo LLM subjacente (DeepSeek, Qwen, Llama) sem alterar o código.
-</details>
+### ✨ A Solução
+A NAP implementa um **Orquestrador Central (Architect)** baseado em grafos de tarefas (DAG). O desenvolvedor insere um requisito em linguagem natural e o Orquestrador:
+- Analisa a demanda
+- Gera documentos de decisão arquitetural (ADRs)
+- Divide o épico em tarefas atômicas
+- Distribui tarefas para agentes de IA hiper-especializados
+- Executa trabalho de forma paralela e segura
 
 ---
 
-## ⚙️ Guia de Instalação e Configuração Completo
+## 🏗️ Arquitetura
 
-### Pré-requisitos e Verificação
+### 📊 Diagramas de Arquitetura
 
-Antes de iniciar a instalação, certifique-se de que sua máquina possui as versões adequadas das ferramentas abaixo executando os comandos em seu terminal:
+> 📁 **Diagramas detalhados disponíveis em:** [`docs/arquitetura/`](docs/arquitetura/)
 
-| Ferramenta | Versão Mínima | Comando de Verificação |
-| :--- | :--- | :--- |
+#### Arquitetura Geral do Sistema
+```mermaid
+graph TD
+    %% Estilos Modernos
+    style User fill:#0f172a,stroke:#3b82f6,stroke-width:3px,color:#fff
+    style Frontend fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
+    style Backend fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
+    style Orchestrator fill:#0f172a,stroke:#f59e0b,stroke-width:3px,color:#fff
+    style AIAgents fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
+    style Data fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
+    style External fill:#374151,stroke:#6b7280,stroke-width:2px,color:#fff
+
+    User[👤 Usuário/Engenheiro]
+    
+    subgraph UI_LAYER["🎨 Camada de Interface"]
+        Frontend[⚡ Frontend - Next.js 14<br/>TypeScript + Tailwind<br/>Porta :3000]
+        CLI[⌨️ CLI/TUI Hacker<br/>Rich + prompt-toolkit]
+    end
+    
+    subgraph API_LAYER["🚀 Camada de API"]
+        Backend[⚙️ Backend - FastAPI<br/>Python 3.10+<br/>Porta :8000]
+        WebSocket[🔌 WebSocket Gateway<br/>Streaming em Tempo Real]
+    end
+    
+    subgraph ORCHESTRATION["🧠 Camada de Orquestração"]
+        Orchestrator[🎯 Orquestrador Central<br/>Graph-based DAG<br/>Task Decomposition]
+        MCP[🛠️ MCP Tools SDK<br/>FileSystem + Git + Docker]
+    end
+    
+    subgraph AI_LAYER["🤖 Camada de Inteligência Artificial"]
+        Architect[📐 Architect Agent<br/>Planning & ADRs]
+        BackendAgent[💻 Backend Agent<br/>Python/FastAPI]
+        FrontendAgent[🎨 Frontend Agent<br/>Next.js/React]
+        Reviewer[🔍 Reviewer Agent<br/>QA & Security]
+        Docs[📝 Docs Agent<br/>Documentation]
+    end
+    
+    subgraph DATA_LAYER["💾 Camada de Dados"]
+        PostgreSQL[(🗄️ PostgreSQL 16<br/>Dados Estruturados)]
+        Redis[(⚡ Redis 7<br/>Cache & Filas)]
+        Qdrant[(📐 Qdrant Vector DB<br/>RAG & Memória)]
+        FileSystem[💾 Workspace<br/>Código Gerado]
+    end
+    
+    subgraph EXTERNAL["🌐 Serviços Externos"]
+        OpenRouter[🔌 OpenRouter API<br/>LLM Gateway]
+    end
+    
+    %% Fluxos
+    User -->|HTTP/HTTPS| Frontend
+    User -->|Terminal| CLI
+    Frontend <-->|REST API| Backend
+    CLI <-->|REST API| Backend
+    Backend -->|Task Submission| Orchestrator
+    Orchestrator -->|Task Distribution| Architect
+    Orchestrator -->|Task Distribution| BackendAgent
+    Orchestrator -->|Task Distribution| FrontendAgent
+    Orchestrator -->|Task Distribution| Reviewer
+    Orchestrator -->|Task Distribution| Docs
+    Architect <-->|LLM Calls| OpenRouter
+    BackendAgent <-->|LLM Calls| OpenRouter
+    FrontendAgent <-->|LLM Calls| OpenRouter
+    Reviewer <-->|LLM Calls| OpenRouter
+    Docs <-->|LLM Calls| OpenRouter
+    BackendAgent -->|Code Generation| FileSystem
+    FrontendAgent -->|Code Generation| FileSystem
+    Reviewer -->|Code Audit| FileSystem
+    Docs -->|Doc Generation| FileSystem
+    Backend <-->|Queries| PostgreSQL
+    Backend <-->|Session Cache| Redis
+    Orchestrator <-->|Semantic Search| Qdrant
+```
+
+#### Outros Diagramas
+
+| Diagrama | Descrição | Arquivo |
+|----------|-----------|---------|
+| **Fluxo de Agentes** | Sequência detalhada de interação | [`02-fluxo-agentes.mmd`](docs/arquitetura/02-fluxo-agentes.mmd) |
+| **Modelo de Dados** | Diagrama ER do banco de dados | [`03-modelo-dados.mmd`](docs/arquitetura/03-modelo-dados.mmd) |
+| **Fluxo de Dados** | Pipeline de processamento | [`04-fluxo-dados.mmd`](docs/arquitetura/04-fluxo-dados.mmd) |
+| **Deploy & Infra** | Arquitetura de produção | [`05-deploy-infra.mmd`](docs/arquitetura/05-deploy-infra.mmd) |
+
+---
+
+## 🤖 Ecossistema Multiagente
+
+### 🎯 Matrix de Especialistas
+
+| Agente | Função | Capacidades |
+|--------|--------|-------------|
+| **📐 Architect** | Orquestrador & Planejamento | ADRs, padrões de design, DAG de tarefas |
+| **💻 Backend** | Desenvolvedor Server-side | Python/FastAPI, async/await, Pydantic v2, SQLAlchemy |
+| **🎨 Frontend** | UI/UX Developer | Next.js App Router, TypeScript, TailwindCSS |
+| **🔍 Reviewer** | QA & Security Auditor | OWASP Top 10, SQL Injection, PEP 8/ESLint |
+| **📝 Docs** | Engenheiro de Conhecimento | Documentação técnica, Markdown, diagramas |
+
+### 🔄 Fluxo de Trabalho
+
+```mermaid
+graph LR
+    A[📋 Requisito] --> B[📐 Architect]
+    B --> C[🧠 Planejamento]
+    C --> D[💻 Backend]
+    C --> E[🎨 Frontend]
+    D --> F[🔍 Reviewer]
+    E --> F
+    F --> G{Aprovado?}
+    G -->|Sim| H[📝 Docs]
+    G -->|Não| D
+    H --> I[✅ Projeto Completo]
+    
+    style A fill:#3b82f6,color:#fff
+    style B fill:#8b5cf6,color:#fff
+    style C fill:#8b5cf6,color:#fff
+    style D fill:#10b981,color:#fff
+    style E fill:#10b981,color:#fff
+    style F fill:#f59e0b,color:#fff
+    style G fill:#ef4444,color:#fff
+    style H fill:#f59e0b,color:#fff
+    style I fill:#22c55e,color:#fff
+```
+
+---
+
+## 🛠️ Stack Tecnológica
+
+### 🎨 Frontend
+| Tecnologia | Versão | Uso |
+|------------|--------|-----|
+| **Next.js** | 14+ | Framework React com App Router |
+| **TypeScript** | 5+ | Tipagem estática |
+| **TailwindCSS** | 3+ | Estilização utility-first |
+| **React** | 18+ | Biblioteca UI |
+
+### ⚙️ Backend
+| Tecnologia | Versão | Uso |
+|------------|--------|-----|
+| **Python** | 3.10+ | Linguagem principal |
+| **FastAPI** | Latest | Framework API async |
+| **Pydantic** | v2 | Validação de dados |
+| **SQLAlchemy** | 2.0+ | ORM |
+| **Alembic** | Latest | Migrações |
+
+### 💾 Dados & Infra
+| Tecnologia | Versão | Uso |
+|------------|--------|-----|
+| **PostgreSQL** | 16+ | Banco transacional |
+| **Redis** | 7+ | Cache e filas |
+| **Qdrant** | Latest | Vector DB para RAG |
+| **Docker** | 24+ | Containerização |
+
+### 🤖 Inteligência Artificial
+| Tecnologia | Uso |
+|------------|-----|
+| **OpenRouter** | Gateway para múltiplos LLMs |
+| **MCP Protocol** | Model Context Protocol |
+| **Vector Embeddings** | Indexação semântica |
+
+---
+
+## ⚙️ Instalação Rápida
+
+### 📋 Pré-requisitos
+
+| Ferramenta | Versão Mínima | Verificação |
+|------------|---------------|-------------|
 | **Docker** | 24.0.0+ | `docker --version` |
 | **Docker Compose** | v2.20.0+ | `docker compose version` |
 | **Git** | 2.34.0+ | `git --version` |
 | **Python** | 3.10.0+ | `python3 --version` |
 | **Node.js** | 18.0.0+ | `node --version` |
 
----
-
-### Configuração de Variáveis de Ambiente (.env)
-
-Crie um arquivo chamado `.env` na raiz do diretório clonado utilizando como base o exemplo abaixo. Configure suas chaves adequadamente:
-
-```env
-# ==============================================================================
-# CONFIGURAÇÕES GERAIS DA PLATAFORMA NAP
-# ==============================================================================
-ENVIRONMENT=development
-PROJECT_NAME="NAP - Nexus AI Platform"
-SECRET_KEY=suachave_secreta_jwt_super_segura_aqui
-
-# ==============================================================================
-# PROVEDORES DE INTELIGÊNCIA ARTIFICIAL (IA)
-# ==============================================================================
-OPENROUTER_API_KEY=sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-DEFAULT_MODEL_ARCHITECT=deepseek/deepseek-chat
-DEFAULT_MODEL_DEVELOPER=qwen/qwen-2.5-coder-32b-instruct
-DEFAULT_MODEL_REVIEWER=google/gemini-flash-1.5
-
-# ==============================================================================
-# BANCOS DE DADOS E PERSISTÊNCIA
-# ==============================================================================
-POSTGRES_USER=nap_admin
-POSTGRES_PASSWORD=nap_secure_pass_99
-POSTGRES_DB=nap_core
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-
-REDIS_HOST=redis
-REDIS_PORT=6379
-REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}/0
-
-QDRANT_HOST=qdrant
-QDRANT_PORT=6333
-
-# ==============================================================================
-# DIRETÓRIOS E WORKSPACE DOS AGENTES
-# ==============================================================================
-WORKSPACE_DIR=/app/workspace
-MAX_CONCURRENT_TASKS=4
-```
-
----
-
-### Deploy com Docker Compose
-
-Esta é a abordagem recomendada para ambientes de homologação ou uso corporativo local rápido, pois inicializa todas as dependências de rede e persistência isoladamente.
+### 🚀 Docker Compose (Recomendado)
 
 ```bash
-# 1. Realize o clone do repositório oficial
-git clone [https://github.com/seu-organizacao/nap-platform.git](https://github.com/seu-organizacao/nap-platform.git)
+# 1. Clone o repositório
+git clone https://github.com/seu-organizacao/nap-platform.git
 cd nap-platform
 
-# 2. Inicialize o arquivo de variáveis de ambiente
+# 2. Configure as variáveis de ambiente
 cp .env.example .env
-# [!] Lembre-se de abrir o .env com seu editor (nano, vim, vscode) e inserir sua chave OpenRouter.
+# Edite o .env e adicione sua chave OpenRouter
 
-# 3. Execute o build e inicialização dos containers em segundo plano (detached mode)
+# 3. Suba os containers
 docker compose up -d --build
 
-# 4. Monitore a saúde da inicialização dos microsserviços
+# 4. Verifique os serviços
 docker compose ps
-
-# 5. Acompanhe a transmissão de logs do core backend se necessário
-docker compose logs -f backend
 ```
 
-#### Verificação de Portas e Serviços Ativos:
-Após a execução com sucesso, valide o acesso aos seguintes endpoints mapeados no seu `localhost`:
-* **Interface Gráfica (Frontend Next.js):** [http://localhost:3000](http://localhost:3000)
-* **Documentação Interativa da API (Swagger UI):** [http://localhost:8000/docs](http://localhost:8000/docs)
-* **Especificação Técnica Completa (ReDoc):** [http://localhost:8000/redoc](http://localhost:8000/redoc)
-* **Painel Administrativo do Banco Vetorial Qdrant:** [http://localhost:6333/dashboard](http://localhost:6333/dashboard)
+### 🔗 Serviços Disponíveis
 
----
+| Serviço | URL | Descrição |
+|---------|-----|-----------|
+| **Frontend** | http://localhost:3000 | Interface web Next.js |
+| **API** | http://localhost:8000 | Backend FastAPI |
+| **Swagger** | http://localhost:8000/docs | Documentação interativa |
+| **ReDoc** | http://localhost:8000/redoc | Especificação OpenAPI |
+| **Qdrant** | http://localhost:6333/dashboard | Painel Vector DB |
 
-### Configuração para Desenvolvimento Local (Bare-Metal)
+### 💻 Desenvolvimento Local
 
-Se você deseja modificar o código fonte da NAP, criar novos agentes ou debugar endpoints diretamente na sua máquina física, siga os passos abaixo de forma isolada para o Backend e o Frontend:
-
-#### Configuração do Ambiente Backend (FastAPI):
+#### Backend
 ```bash
-# Navegue até a pasta do backend
 cd backend
-
-# Crie um ambiente virtual Python isolado
 python3 -m venv venv
-
-# Ative o ambiente virtual
-# No Linux/macOS:
-source venv/bin/activate
-# No Windows (PowerShell):
-# .\venv\Scripts\Activate.ps1
-
-# Atualize o gerenciador de pacotes pip e instale as dependências
-pip install --upgrade pip
+source venv/bin/activate  # Linux/macOS
 pip install -r requirements.txt
-
-# Execute as migrações iniciais do banco de dados via Alembic
 alembic upgrade head
-
-# Inicie o servidor em modo de desenvolvimento com hot-reload ativo
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app.main:app --reload
 ```
 
-#### Configuração do Ambiente Frontend (Next.js):
+#### Frontend
 ```bash
-# Abra uma nova aba no terminal e acesse a pasta do frontend
 cd frontend
-
-# Instale os pacotes e dependências listadas no package.json
 npm install
-
-# Inicialize o servidor de desenvolvimento local node
 npm run dev
 ```
-O painel de desenvolvimento front-end estará disponível em `http://localhost:3000`.
+
+### 🔧 Configuração do .env
+
+```env
+# Geral
+ENVIRONMENT=development
+SECRET_KEY=sua_chave_secreta_aqui
+
+# OpenRouter
+OPENROUTER_API_KEY=sk-or-v1-***
+DEFAULT_MODEL_ARCHITECT=deepseek/deepseek-chat
+DEFAULT_MODEL_DEVELOPER=qwen/qwen-2.5-coder-32b-instruct
+
+# Banco de Dados
+POSTGRES_USER=nap_admin
+POSTGRES_PASSWORD=nap_secure_pass
+POSTGRES_DB=nap_core
+DATABASE_URL=postgresql+asyncpg://nap_admin:nap_secure_pass@postgres:5432/nap_core
+
+# Redis & Qdrant
+REDIS_URL=redis://redis:6379/0
+QDRANT_HOST=qdrant
+QDRANT_PORT=6333
+```
 
 ---
 
-## 💻 Manual de Uso da CLI / TUI Hacker
+## 💻 CLI / TUI Hacker
 
-Para desenvolvedores veteranos que preferem a velocidade do teclado à navegação por cliques no mouse, a NAP disponibiliza uma Terminal User Interface (TUI) imersiva construída sobre as bibliotecas `Rich` e `prompt-toolkit`.
+Para desenvolvedores que preferem a velocidade do terminal, a NAP disponibiliza uma **Terminal User Interface (TUI)** imersiva construída sobre `Rich` e `prompt-toolkit`.
 
-### Formas de Execução
-* **Se instalado via pacote Debian:** Execute diretamente o atalho global `nap-tui`.
-* **Se executando manualmente via código fonte:** No diretório raiz, execute `python -m cli.v2.main`.
+### 🚀 Execução
 
-### Layout da Interface do Terminal
-Ao ser instanciado, o terminal se divide em 3 painéis principais responsivos:
-1.  **Painel Esquerdo (Prompt & Logs do Orquestrador):** Local onde você digita seus comandos e visualiza o agente Architect fatiando os épicos em micro-tarefas.
-2.  **Painel Superior Direito (Acompanhamento em Tempo Real):** Exibe barras de progresso animadas para cada agente ativo, mostrando qual arquivo está sendo lido, editado ou auditado naquele exato segundo.
-3.  **Painel Inferior Direito (Terminal de Aprovação):** Canal crítico de governança onde a IA interrompe o fluxo para solicitar autorizações do usuário.
+```bash
+# Via pacote Debian
+nap-tui
 
-### Atalhos Críticos de Controle na TUI:
-* `Ctrl + C`: Cancela imediatamente o processamento do agente atual e reverte as alterações parciais não salvas no Git.
-* `Tab`: Alterna o foco de digitação e navegação entre o painel de histórico de comandos e o painel de aprovações.
-* `Ctrl + L`: Limpa a tela de logs sem perder o estado de processamento em background da sessão de IA.
-* `Seta Cima / Seta Baixo`: Navega pelo histórico de comandos executados anteriormente na sessão.
+# Via código fonte
+python -m cli.v2.main
+```
 
----
+### 🎨 Layout da Interface
 
-## 🚀 Documentação da API e Endpoints Principais
+1. **Painel Esquerdo:** Prompt & Logs do Orquestrador
+2. **Painel Superior Direito:** Acompanhamento em Tempo Real (progress bars)
+3. **Painel Inferior Direito:** Terminal de Aprovação (governança)
 
-A API do backend atua como um barramento REST HTTP e via canais bidirecionais contínuos de WebSockets. Abaixo estão os endpoints mais importantes para integrações de sistemas de terceiros ou automações em pipelines de CI/CD:
+### ⌨️ Atalhos
 
-### Endpoints REST HTTP
-
-| Método | Rota | Descrição Técnica | Corpo da Requisição / Parâmetros |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/health` | Verificação de integridade operacional (Liveness/Readiness probe). | Nenhum. Retorna status `200 OK`. |
-| `POST` | `/api/v1/tasks/submit` | Envia um requisito para o Orquestrador iniciar a criação da DAG. | `{"prompt": "string", "context_id": "string"}` |
-| `GET` | `/api/v1/tasks/{task_id}` | Consulta o estado atualizado de uma tarefa específica e logs. | `task_id` (parâmetro de rota). |
-| `GET` | `/api/v1/agents/status` | Retorna a matriz de agentes do ecossistema informando ocupação. | Nenhum. |
-| `POST` | `/api/v1/workspace/clean` | Limpa arquivos temporários gerados por agentes com falha. | `{"workspace_id": "string"}` |
-
-### Canal de Comunicação em Tempo Real (WebSockets)
-* **Rota:** `WS://localhost:8000/api/v1/stream/tasks/{session_id}`
-* **Descrição:** O cliente se conecta a este canal para receber transmissões de dados em tempo real (*streaming de tokens*) à medida que as LLMs respondem, além de capturar imediatamente mudanças de progresso nas barras da TUI.
+| Atalho | Ação |
+|--------|------|
+| `Ctrl + C` | Cancela processamento e reverte alterações |
+| `Tab` | Alterna foco entre painéis |
+| `Ctrl + L` | Limpa tela de logs |
+| `↑ / ↓` | Navega histórico de comandos |
 
 ---
 
-## 🛡️ Segurança, Governança e Human-in-the-Loop
+## 🚀 Documentação da API
 
-Deixar agentes de Inteligência Artificial manipularem arquivos de código fonte e comandos de terminal sem supervisão pode resultar em desastres estruturais. A NAP implementa camadas rígidas de controle operacional:
+### Endpoints REST
 
-1.  **Princípio "Human-in-the-Loop" (HITL):** Por padrão, qualquer comando gerado por um agente classificado como prejudicial ou destrutivo (ex: `rm -rf`, `docker compose down`, modificações estruturais em bancos SQL) é colocado em estado de suspensão. O sistema aguarda um sinal explícito `Y` (Sim) do operador.
-2.  **Isolamento em Ambientes Seguros (Sandboxing):** As tarefas de compilação, checagem e execução de códigos acontecem dentro de containers efêmeros e isolados.
-3.  **Auditoria Automatizada via Git:** Toda alteração de código abre automaticamente uma *feature branch* temporária. Nenhuma escrita acontece diretamente na branch `main` sem que o Agente Reviewer valide a integridade e o humano realize o merge via Pull Request.
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| `GET` | `/health` | Health check |
+| `POST` | `/api/v1/tasks/submit` | Envia requisito para orquestrador |
+| `GET` | `/api/v1/tasks/{task_id}` | Consulta estado de tarefa |
+| `GET` | `/api/v1/agents/status` | Status dos agentes |
+| `POST` | `/api/v1/workspace/clean` | Limpa workspace |
 
----
+### WebSocket
 
-## 🤝 Guia de Contribuição e Engenharia de Agentes
-
-O ecossistema NAP é modular, permitindo a adição de novos agentes especialistas facilmente. Se você deseja contribuir criando, por exemplo, um *Agente de Engenharia de Infraestrutura e Terraform (DevOps Agent)*, siga o padrão de engenharia:
-
-1.  **Criação do Prompt de Sistema:** Adicione a definição comportamental rigorosa do novo agente em `backend/app/agents/prompts/devops.json`.
-2.  **Herdar a Classe Base de Agentes:** Crie o arquivo em `backend/app/agents/devops_agent.py`, herdando de `BaseAgent` e implementando o método assíncrono `execute_task`.
-3.  **Mapear as Ferramentas MCP:** Declare no arquivo de configuração a quais ferramentas do Model Context Protocol o agente terá acesso.
-4.  **Registrar no Orquestrador:** Abra `backend/app/orchestrator/graph.py` e adicione o nó do novo agente nas possibilidades de roteamento de tarefas da DAG manipulada pelo *Architect Agent*.
+- **Rota:** `WS://localhost:8000/api/v1/stream/tasks/{session_id}`
+- **Descrição:** Streaming em tempo real de tokens e progresso
 
 ---
 
-## 🗺️ Roadmap e Visão de Futuro
+## 🛡️ Segurança
 
-- [ ] **RAG Arquitetural Avançado:** Indexação de livros de referência de design de código no Qdrant para forçar agentes a seguirem padrões de nível sênior.
-- [ ] **Autenticação Corporativa:** Controle de acesso via chaves JWT integradas a provedores OAuth2 (Azure AD, Okta, Keycloak).
-- [ ] **Execução Concorrente de Agentes:** Permitir que o Backend Agent e o Frontend Agent desenvolvam a mesma funcionalidade em paralelo, utilizando o Architect Agent para arbitrar conflitos de interface.
-- [ ] **Módulo Auto-Healing Inteligente:** Capacidade de o sistema ler logs de erro de produção reais e propor patches corretivos sem intervenção humana prévia.
+### 🔒 Human-in-the-Loop (HITL)
+
+Comandos prejudiciais (`rm -rf`, `docker compose down`, etc.) são suspensos aguardando aprovação explícita do operador.
+
+### 🛡️ Sandboxing
+
+Tarefas de compilação e execução acontecem em containers efêmeros e isolados.
+
+### 📋 Auditoria Git
+
+Toda alteração cria uma *feature branch* temporária. Nada é mergeado na `main` sem validação do Reviewer e aprovação humana.
+
+---
+
+## 🤝 Contribuição
+
+O ecossistema NAP é modular. Para adicionar um novo agente (ex: DevOps Agent):
+
+1. **Criar Prompt de Sistema:** `backend/app/agents/prompts/devops.json`
+2. **Herdar Classe Base:** `backend/app/agents/devops_agent.py` (herda de `BaseAgent`)
+3. **Mapear Ferramentas MCP:** Declarar tools disponíveis no config
+4. **Registrar no Orquestrador:** Adicionar nó em `backend/app/orchestrator/graph.py`
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] ✅ Arquitetura base com orquestrador
+- [ ] ✅ 5 agentes especializados iniciais
+- [ ] 🔄 Interface TUI hacker melhorada
+- [ ] 📋 Suporte a mais modelos LLM
+- [ ] 🔄 Integração com CI/CD
+- [ ] 📋 Marketplace de agentes customizados
+- [ ] 🔄 Dashboard de métricas avançado
+- [ ] 📋 Multi-tenancy
+
+---
+
+## 📄 Licença
+
+MIT License - veja [LICENSE](LICENSE) para detalhes.
 
 ---
 
 <div align="center">
-    <strong>Nexus AI Platform (NAP)</strong><br>
-    <em>Construído por Engenheiros de Software, Escalado por Inteligência Artificial.</em>
+
+**⚡ Feito com ❤️ pela equipe NAP**
+
+[🔝 Voltar ao topo](#-nap--nexus-ai-platform)
+
 </div>

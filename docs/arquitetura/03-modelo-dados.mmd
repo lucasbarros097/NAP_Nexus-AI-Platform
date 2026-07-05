@@ -1,0 +1,108 @@
+erDiagram
+    USERS ||--o{ TASKS : "cria"
+    USERS ||--o{ SESSIONS : "inicia"
+    TASKS ||--o{ SUBTASKS : "contém"
+    TASKS ||--|| AGENTS : "executado_por"
+    SESSIONS ||--o{ MESSAGES : "contém"
+    WORKSPACE ||--o{ FILES : "armazena"
+    KNOWLEDGE ||--o{ DOCUMENTS : "indexa"
+    
+    USERS {
+        uuid id PK
+        string email UK
+        string username
+        timestamp created_at
+        jsonb preferences
+    }
+    
+    TASKS {
+        uuid id PK
+        uuid user_id FK
+        string title
+        text description
+        string status
+        jsonb dag_structure
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    SUBTASKS {
+        uuid id PK
+        uuid task_id FK
+        string title
+        text description
+        string agent_type
+        string status
+        jsonb dependencies
+        jsonb result
+        timestamp started_at
+        timestamp completed_at
+    }
+    
+    AGENTS {
+        uuid id PK
+        string name
+        string type
+        string specialization
+        jsonb capabilities
+        jsonb tools_available
+        boolean is_active
+    }
+    
+    SESSIONS {
+        uuid id PK
+        uuid user_id FK
+        uuid task_id FK
+        string status
+        jsonb context
+        timestamp started_at
+        timestamp ended_at
+    }
+    
+    MESSAGES {
+        uuid id PK
+        uuid session_id FK
+        string role
+        text content
+        jsonb metadata
+        timestamp created_at
+    }
+    
+    WORKSPACE {
+        uuid id PK
+        uuid task_id FK
+        string path
+        string type
+        jsonb structure
+        timestamp created_at
+    }
+    
+    FILES {
+        uuid id PK
+        uuid workspace_id FK
+        string name
+        string path
+        string content_type
+        bigint size
+        jsonb metadata
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    KNOWLEDGE {
+        uuid id PK
+        string collection_name
+        jsonb configuration
+        timestamp created_at
+    }
+    
+    DOCUMENTS {
+        uuid id PK
+        uuid knowledge_id FK
+        string title
+        text content
+        vector embedding
+        jsonb metadata
+        timestamp created_at
+        timestamp updated_at
+    }

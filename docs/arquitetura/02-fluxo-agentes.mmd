@@ -1,0 +1,69 @@
+sequenceDiagram
+    autonumber
+    participant User as 👤 Usuário
+    participant Frontend as 🎨 Frontend
+    participant Backend as 🚀 Backend API
+    participant Orchestrator as 🧠 Orquestrador
+    participant Architect as 📐 Architect
+    participant BackendAgent as 💻 Backend Agent
+    participant FrontendAgent as 🎨 Frontend Agent
+    participant Reviewer as 🔍 Reviewer
+    participant Docs as 📝 Docs Agent
+    participant FileSystem as 💾 FileSystem
+    
+    User->>Frontend: Envia Requisito (Prompt)
+    Frontend->>Backend: POST /api/v1/tasks/submit
+    Backend->>Orchestrator: Cria Sessão de Tarefa
+    
+    Orchestrator->>Architect: Analisa Requisito
+    Architect->>Architect: Gera ADRs e Plano Técnico
+    Architect-->>Orchestrator: Retorna DAG de Tarefas
+    
+    Orchestrator->>Orchestrator: Decompõe em Micro-tarefas
+    
+    par Execução Paralela de Agentes
+        Orchestrator->>BackendAgent: Tarefa Backend
+        BackendAgent->>FileSystem: Lê Arquivos
+        BackendAgent->>BackendAgent: Gera Código
+        BackendAgent->>FileSystem: Escreve Código
+        BackendAgent-->>Orchestrator: Tarefa Concluída
+    and
+        Orchestrator->>FrontendAgent: Tarefa Frontend
+        FrontendAgent->>FileSystem: Lê Componentes
+        FrontendAgent->>FrontendAgent: Gera UI
+        FrontendAgent->>FileSystem: Escreve Componentes
+        FrontendAgent-->>Orchestrator: Tarefa Concluída
+    end
+    
+    Orchestrator->>Reviewer: Solicita Revisão
+    Reviewer->>FileSystem: Lê Código Gerado
+    Reviewer->>Reviewer: Análise de Segurança
+    Reviewer->>Reviewer: Verificação de Qualidade
+    Reviewer-->>Orchestrator: Relatório de Revisão
+    
+    alt Revisão Aprovada
+        Orchestrator->>Docs: Solicita Documentação
+        Docs->>FileSystem: Lê Código
+        Docs->>Docs: Gera Documentação
+        Docs->>FileSystem: Escreve Docs
+        Docs-->>Orchestrator: Documentação Concluída
+        
+        Orchestrator-->>Backend: Tarefa Completa
+        Backend-->>Frontend: Status Final
+        Frontend-->>User: Projeto Pronto
+    else Revisão Rejeitada
+        Orchestrator->>BackendAgent: Correções Necessárias
+        BackendAgent->>FileSystem: Corrige Código
+        BackendAgent-->>Orchestrator: Código Corrigido
+        
+        Orchestrator->>Reviewer: Nova Revisão
+        Reviewer->>Reviewer: Re-análise
+        Reviewer-->>Orchestrator: Nova Aprovação
+        
+        Orchestrator->>Docs: Gera Documentação Final
+        Docs-->>Orchestrator: Docs Concluídas
+        
+        Orchestrator-->>Backend: Tarefa Completa
+        Backend-->>Frontend: Status Final
+        Frontend-->>User: Projeto Pronto
+    end

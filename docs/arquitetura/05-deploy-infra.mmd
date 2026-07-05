@@ -1,0 +1,88 @@
+graph TB
+    %% Estilos para Infraestrutura
+    style LB fill:#0f172a,stroke:#3b82f6,stroke-width:3px,color:#fff
+    style Web fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
+    style API fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
+    style Worker fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style DB fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
+    style Ext fill:#374151,stroke:#6b7280,stroke-width:2px,color:#fff
+    
+    subgraph EXTERNAL["🌐 External Services"]
+        LB[⚖️ Load Balancer<br/>Nginx/Traefik]
+        User[👤 Usuários]
+    end
+    
+    subgraph FRONTEND["🎨 Frontend Layer"]
+        Web1[🌐 Next.js App 1<br/>Porta :3000]
+        Web2[🌐 Next.js App 2<br/>Porta :3000]
+    end
+    
+    subgraph BACKEND["🚀 Backend Layer"]
+        API1[⚙️ FastAPI 1<br/>Porta :8000]
+        API2[⚙️ FastAPI 2<br/>Porta :8000]
+    end
+    
+    subgraph WORKERS["🤖 Worker Layer"]
+        Worker1[🧠 AI Worker 1<br/>Orchestrator]
+        Worker2[🧠 AI Worker 2<br/>Agent Execution]
+        Worker3[🧠 AI Worker 3<br/>Agent Execution]
+    end
+    
+    subgraph DATA["💾 Data Layer"]
+        PG[(🗄️ PostgreSQL<br/>Replica Set)]
+        Redis[(⚡ Redis Cluster<br/>Sentinel)]
+        Qdrant[(📐 Qdrant Cluster<br/>Vector DB)]
+    end
+    
+    subgraph STORAGE["📦 Storage Layer"]
+        FileSystem[💾 NFS/MinIO<br/>Workspace Storage]
+        Logs[📋 Log Aggregation<br/>ELK/Loki]
+    end
+    
+    subgraph MONITORING["📊 Monitoring"]
+        Prometheus[📈 Prometheus]
+        Grafana[📉 Grafana]
+        AlertManager[🚨 AlertManager]
+    end
+    
+    %% Conexões
+    User --> LB
+    LB --> Web1
+    LB --> Web2
+    
+    Web1 --> API1
+    Web1 --> API2
+    Web2 --> API1
+    Web2 --> API2
+    
+    API1 --> Worker1
+    API1 --> Worker2
+    API2 --> Worker2
+    API2 --> Worker3
+    
+    API1 <--> PG
+    API2 <--> PG
+    API1 <--> Redis
+    API2 <--> Redis
+    Worker1 <--> Qdrant
+    Worker2 <--> Qdrant
+    Worker3 <--> Qdrant
+    
+    Worker1 --> FileSystem
+    Worker2 --> FileSystem
+    Worker3 --> FileSystem
+    
+    API1 --> Logs
+    API2 --> Logs
+    Worker1 --> Logs
+    Worker2 --> Logs
+    Worker3 --> Logs
+    
+    API1 --> Prometheus
+    API2 --> Prometheus
+    Worker1 --> Prometheus
+    Worker2 --> Prometheus
+    Worker3 --> Prometheus
+    
+    Prometheus --> Grafana
+    Prometheus --> AlertManager

@@ -1,0 +1,43 @@
+graph LR
+    %% Estilos para o Fluxo de Dados
+    style Input fill:#0f172a,stroke:#3b82f6,stroke-width:3px,color:#fff
+    style Process fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
+    style Storage fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
+    style Output fill:#0f172a,stroke:#f59e0b,stroke-width:3px,color:#fff
+    
+    Input[📥 Entrada<br/>Prompt do Usuário]
+    
+    subgraph PROCESSAMENTO["🔄 Processamento"]
+        P1[🧠 Análise de Requisitos<br/>Architect Agent]
+        P2[📋 Decomposição em Tarefas<br/>DAG Generation]
+        P3[⚡ Execução Paralela<br/>Multi-Agent]
+        P4[🔍 Validação & QA<br/>Reviewer Agent]
+        P5[📝 Documentação<br/>Docs Agent]
+    end
+    
+    subgraph ARMAZENAMENTO["💾 Armazenamento"]
+        S1[(🗄️ PostgreSQL<br/>Dados Estruturados)]
+        S2[(⚡ Redis<br/>Cache & Sessões)]
+        S3[(📐 Qdrant<br/>Vetores & RAG)]
+        S4[💾 FileSystem<br/>Código & Docs]
+    end
+    
+    Output[📤 Saída<br/>Projeto Completo]
+    
+    %% Fluxo Principal
+    Input --> P1
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+    P4 --> P5
+    P5 --> Output
+    
+    %% Interações com Armazenamento
+    P1 -.->|Busca Contexto| S3
+    P2 -.->|Persiste DAG| S1
+    P3 -.->|Cache Progresso| S2
+    P3 -.->|Lê/Escreve Código| S4
+    P4 -.->|Audita Arquivos| S4
+    P4 -.->|Registra Logs| S1
+    P5 -.->|Gera Docs| S4
+    P5 -.->|Indexa Conhecimento| S3

@@ -1,0 +1,80 @@
+graph TD
+    %% Estilos Modernos com Gradientes
+    style User fill:#0f172a,stroke:#3b82f6,stroke-width:3px,color:#fff
+    style Frontend fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
+    style Backend fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
+    style Orchestrator fill:#0f172a,stroke:#f59e0b,stroke-width:3px,color:#fff
+    style AIAgents fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
+    style Data fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
+    style External fill:#374151,stroke:#6b7280,stroke-width:2px,color:#fff
+
+    User[👤 Usuário/Engenheiro]
+    
+    subgraph UI_LAYER["🎨 Camada de Interface"]
+        Frontend[⚡ Frontend - Next.js 14<br/>TypeScript + Tailwind<br/>Porta :3000]
+        CLI[⌨️ CLI/TUI Hacker<br/>Rich + prompt-toolkit<br/>Terminal Interface]
+    end
+    
+    subgraph API_LAYER["🚀 Camada de API"]
+        Backend[⚙️ Backend - FastAPI<br/>Python 3.10+<br/>Porta :8000]
+        WebSocket[🔌 WebSocket Gateway<br/>Streaming em Tempo Real]
+    end
+    
+    subgraph ORCHESTRATION["🧠 Camada de Orquestração"]
+        Orchestrator[🎯 Orquestrador Central<br/>Graph-based DAG<br/>Task Decomposition]
+        MCP[🛠️ MCP Tools SDK<br/>FileSystem + Git + Docker]
+    end
+    
+    subgraph AI_LAYER["🤖 Camada de Inteligência Artificial"]
+        Architect[📐 Architect Agent<br/>Planning & ADRs]
+        BackendAgent[💻 Backend Agent<br/>Python/FastAPI]
+        FrontendAgent[🎨 Frontend Agent<br/>Next.js/React]
+        Reviewer[🔍 Reviewer Agent<br/>QA & Security]
+        Docs[📝 Docs Agent<br/>Documentation]
+    end
+    
+    subgraph DATA_LAYER["💾 Camada de Dados"]
+        PostgreSQL[(🗄️ PostgreSQL 16<br/>Dados Estruturados)]
+        Redis[(⚡ Redis 7<br/>Cache & Filas)]
+        Qdrant[(📐 Qdrant Vector DB<br/>RAG & Memória)]
+        FileSystem[💾 Workspace<br/>Código Gerado]
+    end
+    
+    subgraph EXTERNAL["🌐 Serviços Externos"]
+        OpenRouter[🔌 OpenRouter API<br/>LLM Gateway]
+    end
+    
+    %% Fluxos de Comunicação
+    User -->|HTTP/HTTPS| Frontend
+    User -->|Terminal| CLI
+    
+    Frontend <-->|REST API| Backend
+    CLI <-->|REST API| Backend
+    Backend <-->|WebSocket Streaming| WebSocket
+    
+    Backend -->|Task Submission| Orchestrator
+    Orchestrator <-->|Tool Execution| MCP
+    
+    Orchestrator -->|Task Distribution| Architect
+    Orchestrator -->|Task Distribution| BackendAgent
+    Orchestrator -->|Task Distribution| FrontendAgent
+    Orchestrator -->|Task Distribution| Reviewer
+    Orchestrator -->|Task Distribution| Docs
+    
+    Architect <-->|LLM Calls| OpenRouter
+    BackendAgent <-->|LLM Calls| OpenRouter
+    FrontendAgent <-->|LLM Calls| OpenRouter
+    Reviewer <-->|LLM Calls| OpenRouter
+    Docs <-->|LLM Calls| OpenRouter
+    
+    BackendAgent -->|Code Generation| FileSystem
+    FrontendAgent -->|Code Generation| FileSystem
+    Reviewer -->|Code Audit| FileSystem
+    Docs -->|Doc Generation| FileSystem
+    
+    Backend <-->|Queries| PostgreSQL
+    Backend <-->|Session Cache| Redis
+    Orchestrator <-->|Semantic Search| Qdrant
+    
+    MCP <-->|File Operations| FileSystem
+    MCP <-->|Git Operations| FileSystem
